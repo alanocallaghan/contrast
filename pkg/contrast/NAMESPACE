@@ -1,6 +1,11 @@
 # Generic functions formula, coef, and vcov are defined in stats package
 import(stats,rms)
 
+importFrom("sandwich", "vcovHC")
+importFrom("nlme", "asOneFormula", "fixef", "getCovariateFormula", 
+           "getGroups", "getGroupsFormula", "glsStruct", "lmeStruct", 
+           "pdSymm", "reStruct", "splitFormula", "varFunc")
+
 #import(MASS)
 
 # Export functions

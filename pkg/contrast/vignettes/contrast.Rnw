@@ -118,7 +118,7 @@ First, some notation:
 
 This package uses one degree of freedom Wald tests to calculate p--values for linear combinations of parameters. For example, the basic linear model is of the form $y=X\beta+\epsilon$, where the individual errors are assumed to be iid $N(0, \sigma^2)$. Ordinary least squares provides us with estimates $\hat{\beta}$, $\hat{\sigma}^2$ and $\hat{\Sigma}$. Given a $(p+1)\times 1$ vector of constants, $c$, we can estimate a linear combination of parameters $\lambda = c'\beta$ by substituting the estimated parameter vectors: $\hat{\lambda} = c'\hat{\beta}$. Using basic linear algebra, $Var[\lambda] =  c'\Sigma c$. The statistic generated for contrasts is
 \begin{equation}\label{E:Wald}
-S = \frac{c'\hat{\beta}}{c'\hat{\Sigma} c} 
+S = \frac{c'\hat{\beta}}{sqrt(c'\hat{\Sigma} c)} 
 \end{equation}
 For linear models with normal errors, $S\sim T_{n-p-1}$ and there is no uncertainty about the distribution of the test statistic and the degrees of freedom. In other cases, this is not true. Asymptotics come into play for several models and there is some ambiguity as to whether a $t$ or normal distribution should be used to compute p--values (See Harrell, 2001, Section 9,2 for a discussion). We follow the conventions of each package: \code{glm}, \code{gls} and \code{lme} models use a $t$ distribution and a normal distribution is used for \code{gee} models. For models where there are extra covariance or correlation parameters, we again follow the lead of the package. For \code{gls} model, the degrees of freedom are $n-p$, while in \code{lme} models, it is $n-p-q$.
 

@@ -7,26 +7,13 @@
 ## contrast <- function (fit, ...) UseMethod("contrast")
 
 ## define the gls, lme and geese versions to execute the lm version
-contrast.gls   <- function(fit, ...)
-{
-  library(nlme)
-  contrastCalc(fit, ...)
-}
+contrast.gls   <- function(fit, ...) contrastCalc(fit, ...)
 
-contrast.lme   <- function(fit, ...)
-{
-  library(nlme)
-  contrastCalc(fit, ...)
-}
+contrast.lme   <- function(fit, ...) contrastCalc(fit, ...)
 
-contrast.geese <- function(fit, ...)
-{
-  library(geepack)
-  contrastCalc(fit, ...)
-}
+contrast.geese <- function(fit, ...) contrastCalc(fit, ...)
 
 contrast.lm    <- function(fit, ...) contrastCalc(fit, ...)
-
 
 contrastCalc <- function(fit, a, b, cnames=NULL,
                          type=c('individual', 'average'),
@@ -120,7 +107,6 @@ contrastCalc <- function(fit, a, b, cnames=NULL,
 
   if(class(fit)[1] == "lm")
     {
-      library(sandwich)
       if(is.null(covType)) covType <- "const"
       covMat <- try(vcovHC(fit, type = covType), silent = TRUE)
       if(class(covMat)[1] == "try-error") {

@@ -1,6 +1,6 @@
 Package: contrast
-Version: 0.20
-Date: 2016-09-21
+Version: 0.21
+Date: 2016-09-22
 Title: A Collection of Contrast Methods
 Author: Max Kuhn, contributions from Steve Weston, Jed Wing, 
   James Forester and Thorn Thaler 
@@ -8,6 +8,6 @@ Maintainer: Max Kuhn <mxkuhn@gmail.com>
 Depends: R (>= 2.2.1), rms
 Suggests: lattice
 Imports: nlme, Hmisc, geepack, MASS, sandwich
-Description: One degree of freedon contrasts for lm, glm, gls, and geese objects.
+Description: One degree of freedom contrasts for lm, glm, gls, and geese objects.
 License: GPL-2
 

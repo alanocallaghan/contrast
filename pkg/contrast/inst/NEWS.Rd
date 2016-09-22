@@ -1,9 +1,18 @@
 
 \name{NEWS}
 \title{News for Package \pkg{contrast}}
-\newcommand{\cpkg}{\href{http://CRAN.R-project.org/package=#1}{\pkg{#1}}}
+\newcommand{\cpkg}{\href{https://CRAN.R-project.org/package=#1}{\pkg{#1}}}
+
+\section{Changes in version 0.22}{
+
+\itemize{
+\item Maintainer email was changed
+\item A typo was fixed in the vingette
+}
+}
 
 \section{Changes in version 0.19}{
+
 \itemize{
 \item For \code{lme} models, Thorn Thaler found a bug in some models where the calculaiton of model degrees of freedon could not be determined and proposed a fix. 
 }

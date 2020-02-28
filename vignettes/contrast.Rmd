@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 options(digits = 3)
 library(knitr)
 library(contrast)
-library(MASS)
+# library(MASS)
 library(nlme)
 library(ggplot2)
 library(geepack)

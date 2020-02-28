@@ -26,6 +26,8 @@ Suggests:
     dplyr,
     ggplot2,
     tidyr,
-    rmarkdown
+    rmarkdown,
+    testthat,
+    covr
 RoxygenNote: 7.0.2.9000
 VignetteBuilder: knitr

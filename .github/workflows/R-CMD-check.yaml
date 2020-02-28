@@ -12,7 +12,6 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: windows-latest, r: '3.5'}
           - {os: windows-latest, r: '3.6'}
           - {os: macOS-latest, r: '3.6'}
           - {os: macOS-latest, r: 'devel'}

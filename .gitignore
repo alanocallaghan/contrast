@@ -2,3 +2,4 @@
 *.gz
 
 pkg/contrast/inst/.Rapp.history
+.DS_Store

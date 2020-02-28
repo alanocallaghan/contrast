@@ -16,8 +16,6 @@ Roxygen: list(markdown = TRUE)
 Depends: R (>= 2.10)
 Imports: 
     nlme,
-    geepack,
-    MASS,
     sandwich,
     rms
 Suggests: 

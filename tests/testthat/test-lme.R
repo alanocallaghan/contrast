@@ -16,7 +16,6 @@ test_that("lme models", {
   c_1 <- contrast(lme_fit_1, a_1, b_1)
   expect_equivalent(
     summary(lme_fit_1)$tTable["Block.L", "p-value"],
-    c_1$Pvalue,
-    tolerance = .001 # Due to
+    c_1$Pvalue
   )
 })

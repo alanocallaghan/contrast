@@ -167,7 +167,7 @@ print(mean_effect, X = TRUE)
 ``` 
 
  
-Additionally, for ordinary linear regression models, there is an option to use sandwich estimates for the covariance matrix of the parameters. See the [sandwich](http://cran.r-project.org/src/contrib/Descriptions/sandwich.html) package for more details. Going back to our comparison of treated versus control in low fat samples, we can use the HC3 estimate in the contrast. 
+Additionally, for ordinary linear regression models, there is an option to use sandwich estimates for the covariance matrix of the parameters. See the [sandwich](https://cran.r-project.org/package=sandwich) package for more details. Going back to our comparison of treated versus control in low fat samples, we can use the HC3 estimate in the contrast. 
 
 ```{r example1Sand}
 high_fat_sand <- 

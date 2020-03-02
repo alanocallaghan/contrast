@@ -2,9 +2,10 @@ Package: contrast
 Title: A Collection of Contrast Methods
 Version: 0.22
 Authors@R: c(
-    person(given = "Max", family = "Kuhn", email = "mxkuhn@gmail.com", role = c("aut", "cre")),
+    person(given = "Alan",  family = "O'Callaghan", email = "alan.ocallaghan@outlook.com", role = c("aut", "cre")),
+    person(given = "Max",   family = "Kuhn", role = "aut"),
     person(given = "Steve", family = "Weston", role = "aut"),
-    person(given = "Jed", family = "Wing", role = "aut"),
+    person(given = "Jed",   family = "Wing", role = "aut"),
     person(given = "James", family = "Forester", role = "aut"),
     person(given = "Thorn", family = "Thaler", role = "aut"))
 Description: One degree of freedom contrasts for 'lm', 'glm', 'gls', and 'geese' objects.

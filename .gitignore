@@ -2,3 +2,8 @@
 *.gz
 
 pkg/contrast/inst/.Rapp.history
+.DS_Store
+.Rproj.user
+.Rhistory
+revdep/checks.noindex/
+revdep/library.noindex/

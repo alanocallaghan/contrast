@@ -4,8 +4,7 @@
 #   gendata <- function(fit, ...) UseMethod("gendata")
 
 # this overrides the version in nlme which doesn't work for us
-formula.gls <- function(x, ..., env=NULL)
-{
+formula.gls <- function(x, ..., env = NULL) {
    if (is.null(env))
       # this seems silly, but it's the way gls defines formula
       eval(x$call$model)
@@ -20,9 +19,13 @@ vcov.geese <- function(object, ...) object$vbeta
 
 # This function mimics rms:::gendata, which is unusable
 # on non-rms objects
-generateData <- function(fit, factors, ..., env=NULL)
-{
-   tt <- tryCatch(terms(fit), error=function(e) terms(formula(fit, env=env)))
+generateData <- function(fit, factors, ..., env = NULL) {
+   tt <-
+      tryCatch(
+         terms(fit),
+         error = function(e)
+            terms(formula(fit, env = env))
+      )
    order <- attr(tt, 'order')
    tlabs <- attr(tt, 'term.labels')
    nam <- tlabs[order == 1]
@@ -34,7 +37,8 @@ generateData <- function(fit, factors, ..., env=NULL)
 
    wh <- charmatch(fnam, nam, 0)
    if (any(wh == 0))
-      stop(paste("factor(s) not in design:", paste(names(factors)[wh == 0], collapse=" ")))
+      stop(paste("factor(s) not in design:", paste(names(factors)[wh == 0], collapse =
+                                                      " ")))
 
    if (nf < length(nam))
       stop('not enough factors')
@@ -45,8 +49,3 @@ generateData <- function(fit, factors, ..., env=NULL)
 
    expand.grid(settings)
 }
-
-
-
-
-

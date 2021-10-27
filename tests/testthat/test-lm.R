@@ -1,15 +1,19 @@
 context("lm models")
 
 # ------------------------------------------------------------------------------
+library(splines)
 
 lm_fit_1 <- lm(mpg ~ (wt + am), data = mtcars)
 lm_fit_2 <- lm(expression ~ ., data = two_factor_crossed)
+lm_fit_3 <- lm(mpg ~ ns(wt, 2) + am, data = mtcars)
 
 summary_1 <- summary(lm_fit_1)
 summary_2 <- summary(lm_fit_2)
+summary_3 <- summary(lm_fit_3)
 
 anova_1 <- anova(lm_fit_1)
 anova_2 <- anova(lm_fit_2)
+anova_3 <- anova(lm_fit_3)
 
 test_that("all numeric", {
   a_1 <- list(am = 0, wt = 2)
@@ -43,5 +47,23 @@ test_that("numeric and factor", {
   expect_equivalent(
     summary_2$coefficients["groupvehicle", "Pr(>|t|)"],
     c_4$Pvalue
+  )
+})
+
+test_that("function in formula works as expected", {
+  a_5 <- list(am = 0, wt = 2)
+  b_5 <- list(am = 1, wt = 2)
+  c_5 <- contrast(lm_fit_3, a_5, b_5)
+  expect_equivalent(
+    summary_3$coefficients["am", "Pr(>|t|)"],
+    c_5$Pvalue
+  )
+
+  # bad inputs
+  a_6 <- list(am = "a", wt = 2)
+  b_6 <- list(am = "b", wt = 2)
+  expect_error(
+    contrast(lm_fit_3, a_6, b_6),
+    "variable 'am' was fitted with type \"numeric\" but type \"factor\""
   )
 })

@@ -35,10 +35,10 @@ generateData <- function(fit, factors, ..., env = NULL) {
    if (nf == 0)
       stop('illegal factors argument')
 
-   wh <- charmatch(fnam, nam, 0)
-   if (any(wh == 0))
-      stop(paste("factor(s) not in design:", paste(names(factors)[wh == 0], collapse =
-                                                      " ")))
+   wh <- sapply(fnam, function(x) any(grepl(x, nam, fixed = TRUE)))
+   if (!all(wh))
+      stop(paste("factor(s) not in design:",
+                 paste(names(factors)[!wh], collapse = " ")))
 
    if (nf < length(nam))
       stop('not enough factors')

@@ -1,3 +1,8 @@
+## version 0.24
+
+ * Bugfix: When using splines, generateData threw an error due to the variable
+   not being within the dataset.
+
 ## version 0.23
 
  * Package reorganized to use `roxygen2`, markdown, `testthat`, code coverage, continuous testing, and other features. 

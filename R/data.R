@@ -31,9 +31,9 @@ NULL
 #'
 #' One of the goals of this experiment was to assess pre-specified
 #'  differences in the configuration at each time point. For example, the
-#'  differences between configurations `A` and `B` at day one is of interest. Also,
-#'  the differences between configurations `C` and `D` at each time points were
-#'  important.
+#'  differences between configurations `A` and `B` at day one is of interest.
+#'  Also, the differences between configurations `C` and `D` at each time points
+#'  were important.
 #'
 #' Since there are missing cells in the design, it is not a complete two-way
 #'  factorial. One way to analyze this experiment is to further collapse the
@@ -47,9 +47,3 @@ NULL
 #' @examples
 #' two_factor_incompl
 NULL
-
-
-
-
-
-

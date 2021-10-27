@@ -2,7 +2,7 @@ Package: contrast
 Title: A Collection of Contrast Methods
 Version: 0.23.0
 Authors@R: c(
-    person(given = "Alan",  family = "O'Callaghan", email = "alan.ocallaghan@outlook.com", role = c("aut", "cre")),
+    person(given = "Alan",  family = "O'Callaghan", email = "alan.ocallaghan@outlook.com", role = c("cre")),
     person(given = "Max",   family = "Kuhn", role = "aut"),
     person(given = "Steve", family = "Weston", role = "aut"),
     person(given = "Jed",   family = "Wing", role = "aut"),

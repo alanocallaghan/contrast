@@ -5,3 +5,4 @@
 ^\.github/workflows/pr-commands\.yaml$
 ^README\.Rmd$
 ^revdep$
+^CRAN-RELEASE$

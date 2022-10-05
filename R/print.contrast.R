@@ -49,7 +49,7 @@ print.contrast <- function(x, X = FALSE, fun = function(u) u, ...) {
     attr(w, "row.names") <- cnames
     attr(w, "class") <- "data.frame"
     w$Contrast <- fun(w$Contrast)
-    w$SE <- fun(w$SE)
+    w$S.E. <- fun(w$S.E.)
     if (x$model != "geese") {
         w$df <- x$df
     }

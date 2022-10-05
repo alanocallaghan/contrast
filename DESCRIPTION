@@ -1,7 +1,7 @@
 Package: contrast
 Title: A Collection of Contrast Methods
-Version: 0.24.1
-Date: 2021-12-14
+Version: 0.24.2
+Date: 2022-10-05
 Authors@R: c(
     person(given = "Alan",  family = "O'Callaghan", email = "alan.ocallaghan@outlook.com", role = c("cre")),
     person(given = "Max",   family = "Kuhn", role = "aut"),

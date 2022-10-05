@@ -84,7 +84,7 @@ coefficients in a fit from one of the functions in Design, along with
 standard errors, confidence limits, t or Z statistics, P-values.
 }
 \details{
-These functions mirror \code{\link[rms:contrast.rms]{rms::contrast.rms()}} but have fewer options.
+These functions mirror \code{\link[rms:contrast]{rms::contrast.rms()}} but have fewer options.
 
 There are some between-package inconsistencies regarding degrees of freedom
 in some models. See the package vignette for more details.
@@ -101,15 +101,17 @@ library(nlme)
 Orthodont2 <- Orthodont
 Orthodont2$newAge <- Orthodont$age - 11
 fm1Orth.lme2 <- lme(distance ~ Sex * newAge,
-                    data = Orthodont2,
-                    random = ~ newAge | Subject)
+    data = Orthodont2,
+    random = ~ newAge | Subject
+)
 summary(fm1Orth.lme2)
 
 contrast(fm1Orth.lme2,
-         a = list(Sex = levels(Orthodont2$Sex), newAge = 8 - 11),
-         b = list(Sex = levels(Orthodont2$Sex), newAge = 10 - 11))
+    a = list(Sex = levels(Orthodont2$Sex), newAge = 8 - 11),
+    b = list(Sex = levels(Orthodont2$Sex), newAge = 10 - 11)
+)
 
-# ------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
 
 anova_model <- lm(expression ~ diet * group, data = two_factor_crossed)
 anova(anova_model)
@@ -117,11 +119,11 @@ anova(anova_model)
 library(ggplot2)
 theme_set(theme_bw() + theme(legend.position = "top"))
 ggplot(two_factor_crossed) +
-  aes(x = diet, y = expression, col = group, shape = group) +
-  geom_point() +
-  geom_smooth(aes(group = group), method = lm, se = FALSE)
+    aes(x = diet, y = expression, col = group, shape = group) +
+    geom_point() +
+    geom_smooth(aes(group = group), method = lm, se = FALSE)
 
-int_model    <- lm(expression ~ diet * group, data = two_factor_crossed)
+int_model <- lm(expression ~ diet * group, data = two_factor_crossed)
 main_effects <- lm(expression ~ diet + group, data = two_factor_crossed)
 
 # Interaction effect is probably real:
@@ -132,7 +134,7 @@ veh_group <- list(diet = "low fat", group = "vehicle")
 trt_group <- list(diet = "low fat", group = "treatment")
 contrast(int_model, veh_group, trt_group)
 
-# ------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
 
 car_mod <- lm(mpg ~ am + wt, data = mtcars)
 print(summary(car_mod), digits = 5)
@@ -140,11 +142,11 @@ print(summary(car_mod), digits = 5)
 mean_wt <- mean(mtcars$wt)
 
 manual_trans <- list(am = 0, wt = mean_wt)
-auto_trans   <- list(am = 1, wt = mean_wt)
+auto_trans <- list(am = 1, wt = mean_wt)
 print(contrast(car_mod, manual_trans, auto_trans), digits = 5)
 }
 \seealso{
-\code{\link[rms:contrast.rms]{rms::contrast.rms()}}, \code{\link[sandwich:vcovHC]{sandwich::vcovHC()}}
+\code{\link[rms:contrast]{rms::contrast.rms()}}, \code{\link[sandwich:vcovHC]{sandwich::vcovHC()}}
 }
 \keyword{models}
 \keyword{regression}

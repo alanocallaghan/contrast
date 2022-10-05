@@ -10,3 +10,4 @@ revdep/library.noindex/
 *.Rcheck
 CRAN-RELEASE
 cran-comments.md
+CRAN-SUBMISSION

@@ -6,3 +6,6 @@
 ^README\.Rmd$
 ^revdep$
 ^CRAN-RELEASE$
+^CRAN-SUBMISSION$
+cran-comments.md
+CRAN-SUBMISSION

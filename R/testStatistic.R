@@ -24,7 +24,9 @@ testStatistic <- function(fit,
         geese = NA
     )
 
-    critVal <- if (!(class(fit)[1] %in% "geese")) {
+    useNormal <- class(fit)[1] == "geese" ||
+        (class(fit)[1] == "glm" && length(dfdm) > 0 && dfdm[1] <= 0)
+    critVal <- if (!useNormal) {
         qt((1 + conf.int) / 2, dfdm)
     } else {
         qnorm((1 + conf.int) / 2)
@@ -32,7 +34,11 @@ testStatistic <- function(fit,
 
     P <- switch(class(fit)[1],
         lm = ,
-        glm = if (length(dfdm) > 0 && dfdm[1] > 0) 2 * (1 - pt(abs(testStat), dfdm)) else 2 * (1 - pnorm(abs(testStat), dfdm)),
+        glm = if (length(dfdm) > 0 && dfdm[1] > 0) {
+            2 * (1 - pt(abs(testStat), dfdm))
+        } else {
+            2 * (1 - pnorm(abs(testStat)))
+        },
         gls = 2 * (1 - pt(abs(testStat), dfdm)),
         lme = 2 * (1 - pt(abs(testStat), dfdm)),
         geese = 2 * (1 - pnorm(abs(testStat)))

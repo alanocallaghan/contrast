@@ -20,6 +20,7 @@ Depends: R (>= 2.10)
 Imports: 
     nlme,
     sandwich,
+    Hmisc,
     rms
 Suggests: 
     knitr,

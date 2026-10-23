@@ -1,9 +1,10 @@
 getCoefficients <- function(fit, ...) {
-      UseMethod("getCoefficients")
-  }
+    UseMethod("getCoefficients")
+}
 
 # the default version of the getCoefficients generic function simply
 # calls coef, and sanity checks the results.
+#' @export 
 getCoefficients.default <- function(fit, ...) {
     tmp <- coef(fit)
 
@@ -17,7 +18,7 @@ getCoefficients.default <- function(fit, ...) {
     }
     tmp
 }
-
+#' @export 
 getCoefficients.lme <- function(fit, ...) {
     nlme::fixef(fit)
 }

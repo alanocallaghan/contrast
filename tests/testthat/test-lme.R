@@ -20,4 +20,12 @@ test_that("lme models", {
         summary(lme_fit_1)$tTable["Block.L", "p-value"],
         c_1$Pvalue
     )
+    expect_equal(
+        c_1$df.residual,
+        min(lme_fit_1$fixDF$X[c_1$X[1, ] != 0])
+    )
+    expect_equal(
+        drop(c_1$var),
+        drop(c_1$X %*% vcov(lme_fit_1) %*% t(c_1$X))
+    )
 })

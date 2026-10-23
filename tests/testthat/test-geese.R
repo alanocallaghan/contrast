@@ -35,6 +35,11 @@ test_that("geese models", {
         summary(geese_fit_1)$mean["trt", "p"],
         c_1$Pvalue
     )
+    expect_true(is.na(c_1$df.residual))
+    expect_equal(
+        drop(c_1$var),
+        drop(c_1$X %*% vcov(geese_fit_1) %*% t(c_1$X))
+    )
 })
 
 test_that("printing", {

@@ -84,7 +84,7 @@ coefficients in a fit from one of the functions in Design, along with
 standard errors, confidence limits, t or Z statistics, P-values.
 }
 \details{
-These functions mirror \code{\link[rms:contrast]{rms::contrast.rms()}} but have fewer options.
+These functions mirror \code{\link[rms:contrast.rms]{rms::contrast.rms()}} but have fewer options.
 
 There are some between-package inconsistencies regarding degrees of freedom
 in some models. See the package vignette for more details.
@@ -146,7 +146,7 @@ auto_trans <- list(am = 1, wt = mean_wt)
 print(contrast(car_mod, manual_trans, auto_trans), digits = 5)
 }
 \seealso{
-\code{\link[rms:contrast]{rms::contrast.rms()}}, \code{\link[sandwich:vcovHC]{sandwich::vcovHC()}}
+\code{\link[rms:contrast.rms]{rms::contrast.rms()}}, \code{\link[sandwich:vcovHC]{sandwich::vcovHC()}}
 }
 \keyword{models}
 \keyword{regression}

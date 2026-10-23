@@ -4,6 +4,7 @@
 #   gendata <- function(fit, ...) UseMethod("gendata")
 
 # this overrides the version in nlme which doesn't work for us
+#' @export 
 formula.gls <- function(x, ..., env = NULL) {
     if (is.null(env)) {
         # this seems silly, but it's the way gls defines formula
@@ -15,7 +16,9 @@ formula.gls <- function(x, ..., env = NULL) {
 }
 
 # methods neeeded, but missing, from geepack
+#' @export 
 coef.geese <- function(object, ...) object$beta
+#' @export 
 vcov.geese <- function(object, ...) object$vbeta
 
 # This function mimics rms:::gendata, which is unusable

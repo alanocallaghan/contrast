@@ -133,6 +133,15 @@ contrast_calc <- function(fit, a, b, cnames = NULL,
                           ...,
                           env = parent.frame(2)) {
     type <- match.arg(type)
+    fcType <- match.arg(fcType, c("simple", "log", "signed"))
+
+    if (!is.numeric(conf.int) || length(conf.int) != 1 || is.na(conf.int) ||
+        !is.finite(conf.int) || conf.int <= 0 || conf.int >= 1) {
+        stop("conf.int must be a single finite number between 0 and 1")
+    }
+    if (!is.function(fcFunc)) {
+        stop("fcFunc must be a function")
+    }
 
     da <- do.call("generateData", list(fit = fit, factors = a, env = env))
     xa <- predictFrame(fit, da, env = env)
@@ -190,6 +199,9 @@ contrast_calc <- function(fit, a, b, cnames = NULL,
     m <- nrow(X)
 
     modelCoef <- getCoefficients(fit)
+    if (anyNA(modelCoef)) {
+        stop("contrasts are not supported for models with aliased coefficients")
+    }
     denom <- xb %*% modelCoef
     numer <- xa %*% modelCoef
     ratio <- fcFunc(numer) / fcFunc(denom)
@@ -200,20 +212,28 @@ contrast_calc <- function(fit, a, b, cnames = NULL,
     )
 
     if (is.character(weights)) {
-        if (weights != "equal") {
+        if (length(weights) != 1 || is.na(weights) || weights != "equal") {
             stop('weights must be "equal" or a numeric vector')
         }
         weights <- rep(1, m)
+    } else if (!is.numeric(weights) || !is.null(dim(weights))) {
+        stop('weights must be "equal" or a numeric vector')
     } else if (length(weights) > 1 && type == "individual") {
         stop('can specify more than one weight only for type="average"')
     } else if (length(weights) != m) {
         stop(paste("there must be", m, "weights"))
     }
     weights <- as.vector(weights)
+    weightSum <- sum(weights)
+
+    if (anyNA(weights) || any(!is.finite(weights)) || any(weights < 0) ||
+        !is.finite(weightSum) || weightSum <= 0) {
+        stop("weights must be finite, non-negative, and have a positive sum")
+    }
 
     if (m > 1 && type == "average") {
         X <- matrix(
-            apply(weights * X, 2, sum) / sum(weights),
+            apply(weights * X, 2, sum) / weightSum,
             nrow = 1,
             dimnames = list(NULL, dimnames(X)[[2]])
         )

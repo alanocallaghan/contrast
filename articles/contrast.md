@@ -16,14 +16,14 @@ vector. This package aims to simplify the process for the user.
 
 First, some notation:
 
-\$\$\begin{align} n &= \text{number of samples} \notag \\ p &=
+\$\$ \begin{align} n &= \text{number of samples} \notag \\ p &=
 \text{number of model parameters associated with fixed effects
 (excluding the intercept)} \notag \\ q &= \text{number of covariance
 parameters with random effects or correlations } \notag \\ Y &=
 \text{\$n\times 1\$ response vector} \notag \\ X &= \text{\$n\times
 (p+1)\$ model matrix} \notag \\ \beta &= \text{model parameters
 associated with fixed effects} \notag \\ \Sigma &= \text{covariance
-matrix associated with the fixed effects} \notag \\ \end{align}\$\$
+matrix associated with the fixed effects} \notag \\ \end{align} \$\$
 
 This package uses one degree of freedom Wald tests to calculate p–values
 for linear combinations of parameters. For example, the basic linear
@@ -101,10 +101,10 @@ high fat diet.
 
 The model used is
 
-\$\$\begin{align} \log\text{Expression}\_2 &= \beta_0 \notag \\ & +
+\$\$ \begin{align} \log\text{Expression}\_2 &= \beta_0 \notag \\ & +
 \beta_1\text{Vehicle Group} \notag \\ & + \beta_2\text{Low Fat Diet}
 \notag \\ & + \beta\_{3}\text{Low Fat Diet and Vehicle Group}
-\end{align}\$\$
+\end{align} \$\$
 
 so that $`p=3`$. Substituting the appropriate coefficients into each
 cell produces the parameters:
@@ -158,9 +158,9 @@ and un-treated in the high fat diet group is in the row labeled as
 To compare the compound data and the vehicle data in the low fat diet
 group, the information above can be used to derive that:
 
-\$\$\begin{align} C - A &= \beta_0 + \beta_2
+\$\$ \begin{align} C - A &= \beta_0 + \beta_2
 -(\beta_0+\beta_1+\beta_2+\beta\_{3}) \notag \\ &= -\beta_1 - \beta\_{3}
-\notag \end{align}\$\$
+\notag \end{align} \$\$
 
 This hypothesis translates to testing $`\beta_1 + \beta_{3} = 0`$, or a
 contrast using $`c=(0, 1, 0, 1)`$. To get the results of the difference

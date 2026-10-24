@@ -149,12 +149,12 @@ summary(fm1Orth.lme2)
 #>  Structure: General positive-definite, Log-Cholesky parametrization
 #>             StdDev    Corr  
 #> (Intercept) 1.8303267 (Intr)
-#> newAge      0.1803454 0.206 
+#> newAge      0.1803453 0.206 
 #> Residual    1.3100397       
 #> 
 #> Fixed effects:  distance ~ Sex * newAge 
 #>                      Value Std.Error DF  t-value p-value
-#> (Intercept)      24.968750 0.4860007 79 51.37595  0.0000
+#> (Intercept)      24.968750 0.4860007 79 51.37596  0.0000
 #> SexFemale        -2.321023 0.7614168 25 -3.04829  0.0054
 #> newAge            0.784375 0.0859995 79  9.12069  0.0000
 #> SexFemale:newAge -0.304830 0.1347353 79 -2.26243  0.0264
@@ -166,7 +166,7 @@ summary(fm1Orth.lme2)
 #> 
 #> Standardized Within-Group Residuals:
 #>          Min           Q1          Med           Q3          Max 
-#> -3.168078360 -0.385939110  0.007103933  0.445154649  3.849463301 
+#> -3.168078585 -0.385939156  0.007103924  0.445154713  3.849463186 
 #> 
 #> Number of Observations: 108
 #> Number of Groups: 27 

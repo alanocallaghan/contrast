@@ -79,7 +79,8 @@ package aims to simplify the process for the user.</p>
 <h2 id="contrasts">Contrasts<a class="anchor" aria-label="anchor" href="#contrasts"></a>
 </h2>
 <p>First, some notation:</p>
-<p><span class="math display">$$\begin{align}
+<p><span class="math display">$$
+\begin{align}
    n &amp;= \text{number of samples} \notag \\
    p &amp;= \text{number of model parameters associated with fixed
 effects (excluding the intercept)} \notag \\
@@ -91,7 +92,8 @@ correlations } \notag \\
 \notag \\
    \Sigma &amp;= \text{covariance matrix associated with the fixed
 effects} \notag \\
-\end{align}$$</span></p>
+\end{align}
+$$</span></p>
 <p>This package uses one degree of freedom Wald tests to calculate
 p–values for linear combinations of parameters. For example, the basic
 linear model is of the form
@@ -190,12 +192,14 @@ value of one of the genes.</p>
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>D</mi><annotation encoding="application/x-tex">D</annotation></semantics></math>:
 the treated samples on a high fat diet.</p>
 <p>The model used is</p>
-<p><span class="math display">$$\begin{align}
+<p><span class="math display">$$
+\begin{align}
 \log\text{Expression}_2 &amp;= \beta_0  \notag \\
     &amp; + \beta_1\text{Vehicle Group} \notag \\
     &amp; + \beta_2\text{Low Fat Diet} \notag \\
     &amp; + \beta_{3}\text{Low Fat Diet and Vehicle Group}
-\end{align}$$</span></p>
+\end{align}
+$$</span></p>
 <p>so that
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>=</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">p=3</annotation></semantics></math>.
 Substituting the appropriate coefficients into each cell produces the
@@ -267,11 +271,13 @@ and un-treated in the high fat diet group is in the row labeled as
 <code><a href="https://rdrr.io/r/stats/summary.lm.html" class="external-link">summary.lm()</a></code>.</p>
 <p>To compare the compound data and the vehicle data in the low fat diet
 group, the information above can be used to derive that:</p>
-<p><span class="math display">$$\begin{align}
+<p><span class="math display">$$
+\begin{align}
 C - A &amp;=    \beta_0 + \beta_2 -(\beta_0+\beta_1+\beta_2+\beta_{3})
 \notag \\
     &amp;= -\beta_1 - \beta_{3} \notag
-\end{align}$$</span></p>
+\end{align}
+$$</span></p>
 <p>This hypothesis translates to testing
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>β</mi><mn>1</mn></msub><mo>+</mo><msub><mi>β</mi><mn>3</mn></msub><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\beta_1 + \beta_{3} = 0</annotation></semantics></math>,
 or a contrast using

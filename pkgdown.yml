@@ -3,7 +3,7 @@ pkgdown: 2.2.1
 pkgdown_sha: ~
 articles:
   contrast: contrast.html
-last_built: 2026-10-24T22:16Z
+last_built: 2026-10-24T22:24Z
 urls:
   reference: https://alanocallaghan.github.io/contrast/reference
   article: https://alanocallaghan.github.io/contrast/articles

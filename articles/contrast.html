@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Contrast Methods • contrast</title>
-<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- katex math --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script><script src="../katex-auto.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
@@ -79,8 +80,8 @@ package aims to simplify the process for the user.</p>
 <h2 id="contrasts">Contrasts<a class="anchor" aria-label="anchor" href="#contrasts"></a>
 </h2>
 <p>First, some notation:</p>
-<p><span class="math display">$$
-\begin{align}
+<p><span class="math display">
+\begin{aligned}
    n &amp;= \text{number of samples} \notag \\
    p &amp;= \text{number of model parameters associated with fixed
 effects (excluding the intercept)} \notag \\
@@ -92,52 +93,35 @@ correlations } \notag \\
 \notag \\
    \Sigma &amp;= \text{covariance matrix associated with the fixed
 effects} \notag \\
-\end{align}
-$$</span></p>
+\end{aligned}
+</span></p>
 <p>This package uses one degree of freedom Wald tests to calculate
 p–values for linear combinations of parameters. For example, the basic
-linear model is of the form
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><mi>X</mi><mi>β</mi><mo>+</mo><mi>ϵ</mi></mrow><annotation encoding="application/x-tex">y=X\beta+\epsilon</annotation></semantics></math>,
-where the individual errors are assumed to be iid
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo stretchy="false" form="prefix">(</mo><mn>0</mn><mo>,</mo><msup><mi>σ</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">N(0, \sigma^2)</annotation></semantics></math>.
-Ordinary least squares provides us with estimates
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>β</mi><mo accent="true">̂</mo></mover><annotation encoding="application/x-tex">\hat{\beta}</annotation></semantics></math>,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mover><mi>σ</mi><mo accent="true">̂</mo></mover><mn>2</mn></msup><annotation encoding="application/x-tex">\hat{\sigma}^2</annotation></semantics></math>
-and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi mathvariant="normal">Σ</mi><mo accent="true">̂</mo></mover><annotation encoding="application/x-tex">\hat{\Sigma}</annotation></semantics></math>.
-Given a
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>p</mi><mo>+</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mo>×</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">(p+1)\times 1</annotation></semantics></math>
-vector of constants,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math>,
-we can estimate a linear combination of parameters
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo>=</mo><msup><mi>c</mi><mo>′</mo></msup><mi>β</mi></mrow><annotation encoding="application/x-tex">\lambda = c'\beta</annotation></semantics></math>
-by substituting the estimated parameter vectors:
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>λ</mi><mo accent="true">̂</mo></mover><mo>=</mo><msup><mi>c</mi><mo>′</mo></msup><mover><mi>β</mi><mo accent="true">̂</mo></mover></mrow><annotation encoding="application/x-tex">\hat{\lambda} = c'\hat{\beta}</annotation></semantics></math>.
-Using basic linear algebra,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi><mi>a</mi><mi>r</mi><mo stretchy="false" form="prefix">[</mo><mi>λ</mi><mo stretchy="false" form="postfix">]</mo><mo>=</mo><msup><mi>c</mi><mo>′</mo></msup><mi mathvariant="normal">Σ</mi><mi>c</mi></mrow><annotation encoding="application/x-tex">Var[\lambda] =  c'\Sigma c</annotation></semantics></math>.
-The statistic generated for contrasts is</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mo>=</mo><mfrac><mrow><msup><mi>c</mi><mo>′</mo></msup><mover><mi>β</mi><mo accent="true">̂</mo></mover></mrow><msqrt><mrow><msup><mi>c</mi><mo>′</mo></msup><mover><mi mathvariant="normal">Σ</mi><mo accent="true">̂</mo></mover><mi>c</mi></mrow></msqrt></mfrac></mrow><annotation encoding="application/x-tex">
-S = \frac{c'\hat{\beta}}{\sqrt{c'\hat{\Sigma} c}} 
-</annotation></semantics></math></p>
-<p>For linear models with normal errors,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mo>∼</mo><msub><mi>T</mi><mrow><mi>n</mi><mo>−</mo><mi>p</mi><mo>−</mo><mn>1</mn></mrow></msub></mrow><annotation encoding="application/x-tex">S\sim T_{n-p-1}</annotation></semantics></math>
-and there is no uncertainty about the distribution of the test statistic
-and the degrees of freedom. In other cases, this is not true.
-Asymptotics come into play for several models and there is some
-ambiguity as to whether a
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math>
-or normal distribution should be used to compute p–values (See Harrell,
+linear model is of the form <span class="math inline">y=X\beta+\epsilon</span>, where the individual
+errors are assumed to be iid <span class="math inline">N(0,
+\sigma^2)</span>. Ordinary least squares provides us with estimates
+<span class="math inline">\hat{\beta}</span>, <span class="math inline">\hat{\sigma}^2</span> and <span class="math inline">\hat{\Sigma}</span>. Given a <span class="math inline">(p+1)\times 1</span> vector of constants, <span class="math inline">c</span>, we can estimate a linear combination of
+parameters <span class="math inline">\lambda = c'\beta</span> by
+substituting the estimated parameter vectors: <span class="math inline">\hat{\lambda} = c'\hat{\beta}</span>. Using
+basic linear algebra, <span class="math inline">Var[\lambda]
+=  c'\Sigma c</span>. The statistic generated for contrasts is</p>
+<p><span class="math display">
+S = \frac{c'\hat{\beta}}{\sqrt{c'\hat{\Sigma} c}}
+</span></p>
+<p>For linear models with normal errors, <span class="math inline">S\sim
+T_{n-p-1}</span> and there is no uncertainty about the distribution of
+the test statistic and the degrees of freedom. In other cases, this is
+not true. Asymptotics come into play for several models and there is
+some ambiguity as to whether a <span class="math inline">t</span> or
+normal distribution should be used to compute p–values (See Harrell,
 2001, Section 9.2 for a discussion). We follow the conventions of each
 package: <code>glm</code>, <code>gls</code> and <code>lme</code> models
-use a
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math>
-distribution and a normal distribution is used for <code>gee</code>
-models. For models where there are extra covariance or correlation
-parameters, we again follow the lead of the package. For
-<code>gls</code> model, the degrees of freedom are
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mi>p</mi></mrow><annotation encoding="application/x-tex">n-p</annotation></semantics></math>,
-while in <code>lme</code> models, it is
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mi>p</mi><mo>−</mo><mi>q</mi></mrow><annotation encoding="application/x-tex">n-p-q</annotation></semantics></math>.</p>
+use a <span class="math inline">t</span> distribution and a normal
+distribution is used for <code>gee</code> models. For models where there
+are extra covariance or correlation parameters, we again follow the lead
+of the package. For <code>gls</code> model, the degrees of freedom are
+<span class="math inline">n-p</span>, while in <code>lme</code> models,
+it is <span class="math inline">n-p-q</span>.</p>
 <p>The remainder of this document shows two examples and how the
 <code>contrast</code> function can be applied to different models.</p>
 <div class="section level3">
@@ -164,8 +148,7 @@ value of one of the genes.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> high fat vehicle       6</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> low fat  treatment     6</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> low fat  vehicle       6</span></span></code></pre></div>
-<p>The study design was a two–way factorial with
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>24</mn></mrow><annotation encoding="application/x-tex">n=24</annotation></semantics></math>:</p>
+<p>The study design was a two–way factorial with <span class="math inline">n=24</span>:</p>
 <pre><code><span><span class="co">#&gt; `geom_smooth()` using formula = 'y ~ x'</span></span></code></pre>
 <p><img src="contrast_files/figure-html/example1Plot-1.png" class="r-plt" alt="" width="700"></p>
 <p>The cell means can be labeled as:</p>
@@ -188,22 +171,19 @@ value of one of the genes.</p>
 </tr>
 </tbody>
 </table>
-<p>The reference cell used by R is cell
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>D</mi><annotation encoding="application/x-tex">D</annotation></semantics></math>:
-the treated samples on a high fat diet.</p>
+<p>The reference cell used by R is cell <span class="math inline">D</span>: the treated samples on a high fat
+diet.</p>
 <p>The model used is</p>
-<p><span class="math display">$$
-\begin{align}
+<p><span class="math display">
+\begin{aligned}
 \log\text{Expression}_2 &amp;= \beta_0  \notag \\
     &amp; + \beta_1\text{Vehicle Group} \notag \\
     &amp; + \beta_2\text{Low Fat Diet} \notag \\
     &amp; + \beta_{3}\text{Low Fat Diet and Vehicle Group}
-\end{align}
-$$</span></p>
-<p>so that
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>=</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">p=3</annotation></semantics></math>.
-Substituting the appropriate coefficients into each cell produces the
-parameters:</p>
+\end{aligned}
+</span></p>
+<p>so that <span class="math inline">p=3</span>. Substituting the
+appropriate coefficients into each cell produces the parameters:</p>
 <table class="table">
 <colgroup>
 <col width="13%">
@@ -218,26 +198,25 @@ parameters:</p>
 <tbody>
 <tr class="odd">
 <td>Vehicle</td>
-<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>β</mi><mn>0</mn></msub><mo>+</mo><msub><mi>β</mi><mn>1</mn></msub><mo>+</mo><msub><mi>β</mi><mn>2</mn></msub><mo>+</mo><msub><mi>β</mi><mn>3</mn></msub></mrow><annotation encoding="application/x-tex">\beta_0 + \beta_1 + \beta_2 + \beta_{3}</annotation></semantics></math></td>
-<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>β</mi><mn>0</mn></msub><mo>+</mo><msub><mi>β</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">\beta_0 +\beta_1</annotation></semantics></math></td>
+<td><span class="math inline">\beta_0 + \beta_1 + \beta_2 +
+\beta_{3}</span></td>
+<td><span class="math inline">\beta_0 +\beta_1</span></td>
 </tr>
 <tr class="even">
 <td>Compound</td>
-<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>β</mi><mn>0</mn></msub><mo>+</mo><msub><mi>β</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">\beta_0 + \beta_2</annotation></semantics></math></td>
-<td><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>β</mi><mn>0</mn></msub><annotation encoding="application/x-tex">\beta_0</annotation></semantics></math></td>
+<td><span class="math inline">\beta_0 + \beta_2</span></td>
+<td><span class="math inline">\beta_0</span></td>
 </tr>
 </tbody>
 </table>
 <p>This means that</p>
 <ul>
 <li>
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>β</mi><mn>2</mn></msub><annotation encoding="application/x-tex">\beta_2</annotation></semantics></math>
-tests for diet effect in the treated samples
-(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mo>−</mo><mi>D</mi></mrow><annotation encoding="application/x-tex">C-D</annotation></semantics></math>)</li>
+<span class="math inline">\beta_2</span> tests for diet effect in
+the treated samples (<span class="math inline">C-D</span>)</li>
 <li>
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>β</mi><mn>1</mn></msub><annotation encoding="application/x-tex">\beta_1</annotation></semantics></math>
-tests for a compounds effect in the high fat diet samples
-(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mo>−</mo><mi>D</mi></mrow><annotation encoding="application/x-tex">B-D</annotation></semantics></math>)</li>
+<span class="math inline">\beta_1</span> tests for a compounds
+effect in the high fat diet samples (<span class="math inline">B-D</span>)</li>
 </ul>
 <p>Fitting the model specified by using <code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm()</a></code>:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -263,27 +242,23 @@ tests for a compounds effect in the high fat diet samples
 <span><span class="co">#&gt; Residual standard error: 0.128 on 20 degrees of freedom</span></span>
 <span><span class="co">#&gt; Multiple R-squared:  0.845,  Adjusted R-squared:  0.821 </span></span>
 <span><span class="co">#&gt; F-statistic: 36.3 on 3 and 20 DF,  p-value: 2.79e-08</span></span></code></pre></div>
-<p>To test the treatment effect in the high fat diet,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi><mo>−</mo><mi>B</mi><mo>=</mo><mi>−</mi><msub><mi>β</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">D-B = -\beta_1</annotation></semantics></math>.
-This coefficient and hypothesis test for the difference between treated
-and un-treated in the high fat diet group is in the row labeled as
-<code>groupvehicle</code> in the output of
-<code><a href="https://rdrr.io/r/stats/summary.lm.html" class="external-link">summary.lm()</a></code>.</p>
+<p>To test the treatment effect in the high fat diet, <span class="math inline">D-B = -\beta_1</span>. This coefficient and
+hypothesis test for the difference between treated and un-treated in the
+high fat diet group is in the row labeled as <code>groupvehicle</code>
+in the output of <code><a href="https://rdrr.io/r/stats/summary.lm.html" class="external-link">summary.lm()</a></code>.</p>
 <p>To compare the compound data and the vehicle data in the low fat diet
 group, the information above can be used to derive that:</p>
-<p><span class="math display">$$
-\begin{align}
+<p><span class="math display">
+\begin{aligned}
 C - A &amp;=    \beta_0 + \beta_2 -(\beta_0+\beta_1+\beta_2+\beta_{3})
 \notag \\
     &amp;= -\beta_1 - \beta_{3} \notag
-\end{align}
-$$</span></p>
-<p>This hypothesis translates to testing
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>β</mi><mn>1</mn></msub><mo>+</mo><msub><mi>β</mi><mn>3</mn></msub><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\beta_1 + \beta_{3} = 0</annotation></semantics></math>,
-or a contrast using
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi><mo>=</mo><mo stretchy="false" form="prefix">(</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">c=(0, 1, 0, 1)</annotation></semantics></math>.
-To get the results of the difference between treated and un-treated in
-the low fat diet group, we (finally) use the contrast function:</p>
+\end{aligned}
+</span></p>
+<p>This hypothesis translates to testing <span class="math inline">\beta_1 + \beta_{3} = 0</span>, or a contrast using
+<span class="math inline">c=(0, 1, 0, 1)</span>. To get the results of
+the difference between treated and un-treated in the low fat diet group,
+we (finally) use the contrast function:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">high_fat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rms/man/contrast.html" class="external-link">contrast</a></span><span class="op">(</span><span class="va">lm_fit_1</span>, </span>
 <span>                     <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>diet <span class="op">=</span> <span class="st">"low fat"</span>, group <span class="op">=</span> <span class="st">"vehicle"</span><span class="op">)</span>,</span>
@@ -360,10 +335,9 @@ in low fat samples, we can use the HC3 estimate in the contrast.</p>
 <span><span class="co">#&gt;    -0.287 0.0447 -0.38 -0.194 -6.43 20        0</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; The HC3 covariance estimator was used.</span></span></code></pre></div>
-<p>The
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math>-statistic
-associated with the sandwich estimate is -6.427 versus -3.891 using the
-traditional estimate of the covariance matrix.</p>
+<p>The <span class="math inline">t</span>-statistic associated with the
+sandwich estimate is -6.427 versus -3.891 using the traditional estimate
+of the covariance matrix.</p>
 </div>
 <div class="section level3">
 <h3 id="generalized-linear-model">Generalized Linear Model<a class="anchor" aria-label="anchor" href="#generalized-linear-model"></a>
@@ -371,15 +345,13 @@ traditional estimate of the covariance matrix.</p>
 <p>In this class of models, the distributional assumptions are expanded
 beyond the normal distribution to the general exponential family. Also,
 these models are linear in the sense that they are linear on a specified
-scale. The link function, denoted as
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>η</mi><annotation encoding="application/x-tex">\eta</annotation></semantics></math>,
-is a function that defines how the linear predictor,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>x</mi><mo>′</mo></msup><mi>β</mi></mrow><annotation encoding="application/x-tex">x'\beta</annotation></semantics></math>,
-enters the model. While there are several approaches to testing for
-statistical differences between models, such as the likelihood ratio or
-score tests, the Wald test is another method for assessing the
-statistical significance of linear combinations of model parameters. The
-basic Wald-type test uses the familiar statistic shown above to evaluate
+scale. The link function, denoted as <span class="math inline">\eta</span>, is a function that defines how the
+linear predictor, <span class="math inline">x'\beta</span>, enters
+the model. While there are several approaches to testing for statistical
+differences between models, such as the likelihood ratio or score tests,
+the Wald test is another method for assessing the statistical
+significance of linear combinations of model parameters. The basic
+Wald-type test uses the familiar statistic shown above to evaluate
 hypotheses. The distributional properties are exact for the normal
 distribution and asymptotically valid for other distributions in the
 exponential family. There are some issues with the Wald test (see Hauck
@@ -388,10 +360,8 @@ statistics are preferred, but these tests cannot handle some types of
 hypotheses, in which case the Wald test can be used.</p>
 <p>For the previous example, it is customary to log transform gene
 expression data using a base of 2, we can illustrate contrasts in
-generalized linear models using the log (base
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>e</mi><annotation encoding="application/x-tex">e</annotation></semantics></math>)
-link. In this case, the actual model being fit is
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">exp</mi><mo>⁡</mo></mrow><mo stretchy="false" form="prefix">(</mo><msup><mi>x</mi><mo>′</mo></msup><mi>β</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\exp(x'\beta)</annotation></semantics></math>.</p>
+generalized linear models using the log (base <span class="math inline">e</span>) link. In this case, the actual model being
+fit is <span class="math inline">\exp(x'\beta)</span>.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">glm_fit_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="fl">2</span><span class="op">^</span><span class="va">expression</span> <span class="op">~</span> <span class="op">(</span><span class="va">group</span> <span class="op">+</span> <span class="va">diet</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span>, </span>
 <span>                 data <span class="op">=</span> <span class="va">two_factor_crossed</span>, </span>
@@ -433,10 +403,8 @@ link. In this case, the actual model being fit is
 <span><span class="co">#&gt;  (Intercept) groupvehicle dietlow fat groupvehicle:dietlow fat</span></span>
 <span><span class="co">#&gt;            0            1           0                        1</span></span></code></pre></div>
 <p>The coefficients and p-values are not wildly different given that the
-scale is slightly different
-(i.e. log<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi></mi><mn>2</mn></msub><annotation encoding="application/x-tex">_2</annotation></semantics></math>
-versus
-log<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi></mi><mi>e</mi></msub><annotation encoding="application/x-tex">_e</annotation></semantics></math>).</p>
+scale is slightly different (i.e. log<span class="math inline">_2</span>
+versus log<span class="math inline">_e</span>).</p>
 </div>
 <div class="section level3">
 <h3 id="generalized-least-squares">Generalized Least Squares<a class="anchor" aria-label="anchor" href="#generalized-least-squares"></a>
@@ -550,17 +518,12 @@ constant.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Residual standard error: 0.17 </span></span>
 <span><span class="co">#&gt; Degrees of freedom: 23 total; 15 residual</span></span></code></pre></div>
-<p>In this example,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>23</mn></mrow><annotation encoding="application/x-tex">n=23</annotation></semantics></math>
-and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>=</mo><mn>8</mn></mrow><annotation encoding="application/x-tex">p=8</annotation></semantics></math>.
-This model estimates the residual variance and the within-subject
-correlation, so
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>q</mi><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">q=2</annotation></semantics></math>.
-The default parameter estimates compare each group to the reference cell
-(day 1, configuration A). The summary table provides one of the p-values
-that we are interested in (configuration A vs. B at day 1). An example
-of obtaining the other p-values is shown below:</p>
+<p>In this example, <span class="math inline">n=23</span> and <span class="math inline">p=8</span>. This model estimates the residual
+variance and the within-subject correlation, so <span class="math inline">q=2</span>. The default parameter estimates compare
+each group to the reference cell (day 1, configuration A). The summary
+table provides one of the p-values that we are interested in
+(configuration A vs. B at day 1). An example of obtaining the other
+p-values is shown below:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/rms/man/contrast.html" class="external-link">contrast</a></span><span class="op">(</span></span>
@@ -649,10 +612,9 @@ positive.</p>
 <span><span class="co">#&gt; 1           0        0        0        0        0        0        1       -1</span></span></code></pre></div>
 <p>Comparing this to the <code>gls</code> model results, the default
 coefficients have identical parameter estimates, standard errors and
-test statistics, but their
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math>-values
-are slightly different. This is due to the difference in how the degrees
-of freedom are calculated between these models. The same is true for the
+test statistics, but their <span class="math inline">p</span>-values are
+slightly different. This is due to the difference in how the degrees of
+freedom are calculated between these models. The same is true for the
 example contrast for the two models (15 versus 13 degrees of
 freedom).</p>
 </div>
@@ -748,12 +710,11 @@ function from the <code>family</code> object.</li>
 predicted value for the <code>b</code> group.</li>
 <li>If the <code>fcType</code> argument is <code>"simple"</code>, the
 ratio is returned as the fold change. <code>fcType = "log"</code>
-returns the log (base
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>e</mi><annotation encoding="application/x-tex">e</annotation></semantics></math>)
-of the ratio. If the type is <code>"signed"</code>, a different
-calculation is used. If the simple ratio is less than one, the negative
-reciprocal of the ratio is returned; otherwise the fold change is equal
-to the simple ratio</li>
+returns the log (base <span class="math inline">e</span>) of the ratio.
+If the type is <code>"signed"</code>, a different calculation is used.
+If the simple ratio is less than one, the negative reciprocal of the
+ratio is returned; otherwise the fold change is equal to the simple
+ratio</li>
 </ul>
 <p>The fold change results are contained in the output as
 <code>foldchange</code>. From the first example:</p>

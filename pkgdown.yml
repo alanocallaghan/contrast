@@ -1,0 +1,9 @@
+pandoc: 3.8.3
+pkgdown: 2.2.1
+pkgdown_sha: ~
+articles:
+  contrast: contrast.html
+last_built: 2026-10-24T20:17Z
+urls:
+  reference: https://alanocallaghan.github.io/contrast/reference
+  article: https://alanocallaghan.github.io/contrast/articles

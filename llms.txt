@@ -1,0 +1,39 @@
+`contrast` contains a set of functions that can make 1 degree of freedom
+contrasts for several type sof models. The package extends the
+[`contrast()`](https://rdrr.io/pkg/rms/man/contrast.html) function from
+the `rms` package.
+
+To install it, use:
+
+``` r
+
+install.packages("contrast")
+
+## For the devel version:
+require(devtools)
+install_github("Alanocallaghan/contrast")
+```
+
+# Package index
+
+## All functions
+
+- [`contrast(`*`<lm>`*`)`](https://alanocallaghan.github.io/contrast/reference/contrast.lm.md)
+  [`contrast(`*`<gls>`*`)`](https://alanocallaghan.github.io/contrast/reference/contrast.lm.md)
+  [`contrast(`*`<lme>`*`)`](https://alanocallaghan.github.io/contrast/reference/contrast.lm.md)
+  [`contrast(`*`<geese>`*`)`](https://alanocallaghan.github.io/contrast/reference/contrast.lm.md)
+  [`contrast_calc()`](https://alanocallaghan.github.io/contrast/reference/contrast.lm.md)
+  : General Contrasts of Regression Coefficients
+- [`print(`*`<contrast>`*`)`](https://alanocallaghan.github.io/contrast/reference/print.contrast.md)
+  : Print a Contrast Object
+- [`two_factor_crossed`](https://alanocallaghan.github.io/contrast/reference/two_factor_crossed.md)
+  : Complete Two-Factor Experiment
+- [`two_factor_incompl`](https://alanocallaghan.github.io/contrast/reference/two_factor_incompl.md)
+  : Incomplete Two-Factor Experiment with Repeated Measurments
+
+# Articles
+
+### All vignettes
+
+- [Contrast
+  Methods](https://alanocallaghan.github.io/contrast/articles/contrast.md):

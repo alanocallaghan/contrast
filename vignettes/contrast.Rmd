@@ -33,6 +33,7 @@ The purpose of the `contrast` package is to provide a standardized interface for
 
 First, some notation:
 
+$$
 \begin{align}
    n &= \text{number of samples} \notag \\
    p &= \text{number of model parameters associated with fixed effects (excluding the intercept)} \notag \\
@@ -42,6 +43,7 @@ First, some notation:
    \beta &= \text{model parameters associated with fixed effects} \notag \\
    \Sigma &= \text{covariance matrix associated with the fixed effects} \notag \\
 \end{align}
+$$
 
 This package uses one degree of freedom Wald tests to calculate p--values for linear combinations of parameters. For example, the basic linear model is of the form $y=X\beta+\epsilon$, where the individual errors are assumed to be iid $N(0, \sigma^2)$. Ordinary least squares provides us with estimates $\hat{\beta}$, $\hat{\sigma}^2$ and $\hat{\Sigma}$. Given a $(p+1)\times 1$ vector of constants, $c$, we can estimate a linear combination of parameters $\lambda = c'\beta$ by substituting the estimated parameter vectors: $\hat{\lambda} = c'\hat{\beta}$. Using basic linear algebra, $Var[\lambda] =  c'\Sigma c$. The statistic generated for contrasts is
 
@@ -89,12 +91,14 @@ The reference cell used by R  is cell $D$: the treated samples on a high fat die
 
 The model used is
 
+$$
 \begin{align}
 \log\text{Expression}_2 &= \beta_0  \notag \\
 	& + \beta_1\text{Vehicle Group} \notag \\
 	& + \beta_2\text{Low Fat Diet} \notag \\
 	& + \beta_{3}\text{Low Fat Diet and Vehicle Group}
 \end{align}
+$$
 
 so that $p=3$. Substituting the appropriate coefficients into each cell produces the parameters: 
 
@@ -120,10 +124,12 @@ To test the treatment effect in the high fat diet, $D-B = -\beta_1$. This coeffi
 
 To compare the compound data and the vehicle data in the low fat diet group, the information above can be used to derive that:
 
+$$
 \begin{align}
 C - A &= 	\beta_0 + \beta_2 -(\beta_0+\beta_1+\beta_2+\beta_{3}) \notag \\
 	&= -\beta_1 - \beta_{3} \notag
 \end{align}
+$$
 
 This hypothesis translates to testing $\beta_1 + \beta_{3} = 0$, or a contrast using $c=(0, 1, 0, 1)$. To get the results of the difference between treated and un-treated in the low fat diet group, we (finally) use the contrast function:
 

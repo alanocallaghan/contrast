@@ -12,3 +12,5 @@ CRAN-RELEASE
 cran-comments.md
 CRAN-SUBMISSION
 docs
+/doc/
+/Meta/

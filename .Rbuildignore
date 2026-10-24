@@ -13,3 +13,5 @@ CRAN-SUBMISSION
 ^docs$
 ^pkgdown$
 ^\.github/workflows/pkgdown\.yaml$
+^doc$
+^Meta$

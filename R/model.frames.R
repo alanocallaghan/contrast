@@ -4,7 +4,7 @@ predictFrame <- function(object, newdata, env, na.action = na.fail) {
     tt <- tryCatch(
         terms(object),
         error = function(e) {
-            terms(formula(object, env = env))
+            terms(modelFormula(object, env = env))
         }
     )
     Terms <- delete.response(tt)

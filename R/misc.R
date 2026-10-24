@@ -3,15 +3,20 @@
 #   contrast <- function(fit, ...) UseMethod("contrast")
 #   gendata <- function(fit, ...) UseMethod("gendata")
 
-# this overrides the version in nlme which doesn't work for us
-#' @export 
+# Evaluate the original gls model formula in the requested environment.
 formula.gls <- function(x, ..., env = NULL) {
     if (is.null(env)) {
-        # this seems silly, but it's the way gls defines formula
         eval(x$call$model)
     } else {
-        # this gives you some control if you know what you're doing
         eval(x$call$model, env)
+    }
+}
+
+modelFormula <- function(object, env = NULL) {
+    if (inherits(object, "gls")) {
+        formula.gls(object, env = env)
+    } else {
+        formula(object, env = env)
     }
 }
 
@@ -27,7 +32,7 @@ generateData <- function(fit, factors, ..., env = NULL) {
     tt <- tryCatch(
         terms(fit),
         error = function(e) {
-            terms(formula(fit, env = env))
+            terms(modelFormula(fit, env = env))
         }
     )
     order <- attr(tt, "order")

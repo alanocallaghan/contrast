@@ -26,3 +26,11 @@ test_that("gls models", {
         drop(c_1$X %*% vcov(gls_fit_1) %*% t(c_1$X))
     )
 })
+
+test_that("gls formulas can use a supplied environment", {
+    env <- new.env(parent = globalenv())
+    expect_identical(
+        environment(contrast:::modelFormula(gls_fit_1, env = env)),
+        env
+    )
+})

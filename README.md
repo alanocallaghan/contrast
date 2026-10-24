@@ -1,5 +1,5 @@
-[![R build status](https://github.com/Alanocallaghan/contrast/workflows/R-CMD-check/badge.svg)](https://github.com/Alanocallaghan/contrast/actions)
-[![Coverage Status](https://img.shields.io/codecov/c/github/Alanocallaghan/contrast/master.svg)](https://codecov.io/github/Alanocallaghan/contrast?branch=master)
+[![R build status](https://github.com/alanocallaghan/contrast/workflows/R-CMD-check/badge.svg)](https://github.com/alanocallaghan/contrast/actions)
+[![Coverage Status](https://img.shields.io/codecov/c/github/alanocallaghan/contrast/master.svg)](https://app.codecov.io/github/alanocallaghan/contrast?branch=master)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/contrast)](https://cran.r-project.org/package=contrast)
 [![Downloads](http://cranlogs.r-pkg.org/badges/contrast)](https://cran.r-project.org/package=contrast)
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html)

@@ -1,3 +1,9 @@
+## contrast 0.25.0
+
+* Add weighted averaging for contrasts and improve input validation.
+* Use model-specific inference for supported model classes.
+* Fix display math rendering in the vignette.
+
 ## version 0.24
 
  * Bugfix: When using splines, generateData threw an error due to the variable
@@ -89,7 +95,6 @@
 ## version 0.10
 
  * Added specific namespace calls to `nlme` so that `lme4` methods do not interfere.
-
 
 
 

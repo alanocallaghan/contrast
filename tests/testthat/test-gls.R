@@ -33,4 +33,35 @@ test_that("gls formulas can use a supplied environment", {
         environment(contrast:::modelFormula(gls_fit_1, env = env)),
         env
     )
+    expect_equal(
+        deparse(contrast:::formula.gls(gls_fit_1)),
+        "logDens ~ Block + dilut"
+    )
+})
+
+test_that("gls model frames reconstruct the fitted data", {
+    frame <- model.frame(gls_fit_1)
+    expected <- model.frame(logDens ~ Block + dilut, data = Assay)[
+        order(Assay$sample),
+    ]
+
+    expect_equal(frame, expected)
+})
+
+test_that("gls model frames honor the fitted subset", {
+    fit <- gls(
+        logDens ~ Block + dilut,
+        data = Assay,
+        correlation = corCompSymm(form = ~ 1 | sample),
+        subset = sample %in% levels(sample)[1:2]
+    )
+    frame <- model.frame(fit)
+    expected <- model.frame(
+        logDens ~ Block + dilut,
+        data = Assay,
+        subset = sample %in% levels(sample)[1:2]
+    )
+    expected <- expected[order(Assay$sample[as.integer(rownames(expected))]), ]
+
+    expect_equal(frame, expected)
 })

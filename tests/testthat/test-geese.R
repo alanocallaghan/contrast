@@ -51,3 +51,37 @@ test_that("printing", {
         "geese model parameter contrast"
     )
 })
+
+test_that("geese model frames include model variables and cluster ids", {
+    frame <- model.frame(geese_fit_1)
+
+    expect_named(
+        frame,
+        c("y", "offset(log(t))", "x", "trt", "(id)")
+    )
+    expect_equal(nrow(frame), nrow(seiz.l))
+    expect_equal(frame$y, seiz.l$y)
+    expect_equal(frame[["(id)"]], seiz.l$id)
+})
+
+test_that("geese contrasts handle factor predictors without stored contrasts", {
+    factor_data <- seiz.l
+    factor_data$trt <- factor(factor_data$trt)
+    fit <- geese(
+        y ~ offset(log(t)) + x + trt,
+        id = id,
+        data = factor_data,
+        corstr = "exch",
+        family = poisson
+    )
+    result <- contrast(
+        fit,
+        list(t = 8, x = 1, trt = levels(factor_data$trt)[2]),
+        list(t = 8, x = 1, trt = levels(factor_data$trt)[1])
+    )
+
+    expect_equal(
+        unname(drop(result$Contrast)),
+        unname(coef(fit)["trt1"])
+    )
+})

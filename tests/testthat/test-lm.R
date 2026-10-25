@@ -151,3 +151,95 @@ test_that("contrast options and aliased coefficients are validated", {
         "contrasts are not supported for models with aliased coefficients"
     )
 })
+
+test_that("contrasts broadcast a single setting and validate generated data", {
+    interaction_fit <- lm(mpg ~ wt * am, data = mtcars)
+
+    a <- contrast(
+        interaction_fit,
+        list(am = 1, wt = c(2, 4)),
+        list(am = 0, wt = 2)
+    )
+    expect_equal(nrow(a$X), 2)
+    expect_equal(a$wt, c(2, 4))
+    expect_equal(drop(a$Contrast), drop(a$X %*% coef(interaction_fit)))
+
+    b <- contrast(
+        interaction_fit,
+        list(am = 1, wt = 2),
+        list(am = 0, wt = c(2, 4))
+    )
+    expect_equal(nrow(b$X), 2)
+    expect_equal(b$wt, c(2, 4))
+    expect_equal(drop(b$Contrast), drop(b$X %*% coef(interaction_fit)))
+
+    one_sided <- contrast(interaction_fit, list(am = 1, wt = 2))
+    expect_equal(
+        drop(one_sided$Contrast),
+        drop(one_sided$X %*% coef(interaction_fit))
+    )
+
+    expect_error(
+        contrast(
+            interaction_fit,
+            list(am = 1, wt = c(2, 4)),
+            list(am = 0, wt = c(2, 3, 4))
+        ),
+        "number of rows must be the same"
+    )
+    expect_error(
+        contrast(lm_fit_1, list(), list(am = 0, wt = 2)),
+        "illegal factors argument"
+    )
+    expect_error(
+        contrast(lm_fit_1, list(not_a_predictor = 1), list(am = 0, wt = 2)),
+        "factor\\(s\\) not in design"
+    )
+    expect_error(
+        contrast(lm_fit_1, list(wt = 2), list(wt = 1)),
+        "not enough factors"
+    )
+    expect_error(
+        contrast(
+            lm_fit_1,
+            list(am = 1, wt = 2),
+            list(am = 0, wt = 2),
+            weights = c(1, 2)
+        ),
+        "only for type=\"average\""
+    )
+    expect_error(
+        contrast(
+            lm_fit_1,
+            list(am = 1, wt = 2),
+            list(am = 0, wt = 2),
+            weights = matrix(1)
+        ),
+        'weights must be "equal" or a numeric vector'
+    )
+})
+
+test_that("lm contrasts fall back to the model covariance when sandwich fails", {
+    expect_warning(
+        a <- contrast(
+            lm_fit_1,
+            list(am = 1, wt = 2),
+            list(am = 0, wt = 2),
+            covType = "not-a-covariance-type"
+        ),
+        "Sandwich estimate failed; using standard estimate instead"
+    )
+    expect_equal(
+        drop(a$var),
+        drop(a$X %*% vcov(lm_fit_1) %*% t(a$X))
+    )
+})
+
+test_that("default coefficient extraction rejects non-vector coefficients", {
+    fit <- summary(lm_fit_1)
+    expect_true(is.matrix(coef(fit)))
+    expect_error(
+        contrast:::getCoefficients.default(fit),
+        "coef function returned bad type"
+    )
+})
